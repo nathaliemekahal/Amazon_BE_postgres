@@ -2,6 +2,10 @@ const express= require('express')
 const db= require('../../db')
 const uniqid=require('uniqid')
 const router=express.Router()
+const { join } = require("path")
+const multer = require("multer")
+const {readFile, writeFile, createReadStream } = require("fs-extra")
+const upload = multer({})
 
 
 router.get('/',async(req,res)=>{
@@ -88,6 +92,36 @@ router.delete("/:id", async (req, res) => {
     
     res.send("OK")
 })
+productsPath = join(__dirname, "../../../../Amazon_CRUD_express/amazon/public/img/products")
 
+
+router.post("/:id/uploadPhoto", upload.single("avatar"), async (req, res) => {
+    try {
+      
+      await writeFile(
+        join(productsPath, req.params.id+'.'+req.file.originalname.split('.').pop()),
+        req.file.buffer
+      )
+     
+      // const studentsArray= JSON.parse(fs.readFileSync(studentsFilePath).toString())
+      // studentsArray.forEach(student =>{
+        // if(student.id === req.params.id){
+          imageurl =`http://localhost:3000/img/products/${req.params.id}.${req.file.originalname.split(".").pop()}`
+        // }
+        let response= await db.query(
+            `
+        UPDATE "Products" SET imageurl=$1 WHERE "_id"=${req.params.id}
+       
+        `,[imageurl])
+    
+        res.send('UPDATED')
+      
+      // })
+  
+    } catch (error) {
+      console.log(error)
+    }
+    res.send("ok")
+  })
 
 module.exports=router
