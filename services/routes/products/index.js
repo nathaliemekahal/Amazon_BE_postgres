@@ -108,6 +108,8 @@ router.post("/:id/uploadPhoto", upload.single("avatar"), async (req, res) => {
         // if(student.id === req.params.id){
           imageurl =`http://localhost:3000/img/products/${req.params.id}.${req.file.originalname.split(".").pop()}`
         // }
+
+
         let response= await db.query(
             `
         UPDATE "Products" SET imageurl=$1 WHERE "_id"=${req.params.id}
