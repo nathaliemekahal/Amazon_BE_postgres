@@ -18,22 +18,15 @@ router.get("/:productid",async(req,res)=>{
     res.send(response.rows)
 })
 
-router.put('/:id',async(req,res)=>{
+router.put('/:productid/:reviewid',async(req,res)=>{
     try {
-        let params=[]
-        let query= 'UPDATE "Reviews" SET '
-
-        for(bodyParams in req.body){
-        query+=
-        (params.length>0? ", ": '') + bodyParams +' = $'+(params.length+1)
-        params.push(req.body[bodyParams])
-        }
-        params.push(req.params.id)
-        query+=' WHERE _id = $'+params.length + ' RETURNING *'
-
-        console.log(query)
-        const result = await db.query(query, params)
-        res.send(result.rows)
+        let response= await db.query(
+            `
+        UPDATE "Reviews" SET _id=$1, comment=$2,rate=$3,"productId"=$4 WHERE "productId"=${req.params.productid}
+        AND _id=${req.params.reviewid} 
+        `,[req.params.reviewid,req.body.comment,req.body.rate,req.params.productid])
+    
+        res.send('UPDATED')
         
     } catch (error) {
         console.log(error)
