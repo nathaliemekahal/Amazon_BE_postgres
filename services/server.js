@@ -2,7 +2,7 @@ const express=require('express')
 const cors=require('cors')
 const dotenv=require('dotenv')
 const productRoute=require('./routes/products')
-// const projectRoute=require('./routes/projects')
+const reviewRoute=require('./routes/reviews')
 
 dotenv.config()
 const db = require('./db')
@@ -15,5 +15,5 @@ server.use(express.json())
 
 
 server.use('/products',productRoute)
-// server.use('/projects',projectRoute)
+server.use('/reviews',reviewRoute)
 server.listen(process.env.PORT||3453,()=>console.log('RUNNING ON',process.env.PORT||3453))
