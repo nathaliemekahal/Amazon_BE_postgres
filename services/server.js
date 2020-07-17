@@ -1,7 +1,7 @@
 const express=require('express')
 const cors=require('cors')
 const dotenv=require('dotenv')
-// const studentRoute=require('./routes/students')
+const productRoute=require('./routes/products')
 // const projectRoute=require('./routes/projects')
 
 dotenv.config()
@@ -14,6 +14,6 @@ server.use(express.json())
 // })
 
 
-// server.use('/students',studentRoute)
+server.use('/products',productRoute)
 // server.use('/projects',projectRoute)
 server.listen(process.env.PORT||3453,()=>console.log('RUNNING ON',process.env.PORT||3453))
