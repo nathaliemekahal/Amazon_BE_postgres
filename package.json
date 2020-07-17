@@ -1,0 +1,29 @@
+{
+  "name": "Amazon_BE_postgres",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev":"nodemon ./services/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nathaliemekahal/Amazon_BE_postgres.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nathaliemekahal/Amazon_BE_postgres/issues"
+  },
+  "homepage": "https://github.com/nathaliemekahal/Amazon_BE_postgres#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "pg": "^8.3.0",
+    "uniqid": "^5.2.0"
+  }
+}
